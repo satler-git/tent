@@ -1,0 +1,22 @@
+name: tent
+version: 0.1.0
+
+authors:
+  - satler-git <mitsclatw24@mbr.nifty.com>
+
+targets:
+  tent:
+    main: src/tent.cr
+
+dependencies:
+  keimeno:
+    github: robacarp/keimeno
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 1.5.0
+
+crystal: '>= 1.10.1'
+
+license: MIT
