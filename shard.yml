@@ -9,8 +9,8 @@ targets:
     main: src/tent.cr
 
 dependencies:
-  keimeno:
-    github: robacarp/keimeno
+  admiral:
+    github: jwaldrip/admiral.cr
 
 development_dependencies:
   ameba:
