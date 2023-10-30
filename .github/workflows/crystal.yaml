@@ -1,0 +1,27 @@
+name: Crystal CI
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  push:
+    paths:
+      - "src/**"
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+
+    container:
+      image: crystallang/crystal
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: shards install
+      - name: Ameba Linter
+        run: ./bin/ameba
