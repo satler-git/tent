@@ -2,7 +2,7 @@ name: tent
 version: 0.1.0
 
 authors:
-  - satler-git <mitsclatw24@mbr.nifty.com>
+  - satler-git
 
 targets:
   tent:
@@ -11,7 +11,8 @@ targets:
 dependencies:
   admiral:
     github: jwaldrip/admiral.cr
-
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
