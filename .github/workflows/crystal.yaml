@@ -8,9 +8,9 @@ on:
   push:
     paths:
       - "src/**"
-    branches: ["main"]
+    branches: ["master"]
   pull_request:
-    branches: ["main"]
+    branches: ["master"]
 
 jobs:
   Lint:
