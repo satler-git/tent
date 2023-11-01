@@ -1,5 +1,18 @@
 class Song
-  def initialize(song_name : String, artist_name : String, count : Int32)
+  property id : Int64
+  property song_name : String
+  property artist_name : String
+  property count : Int64
+
+  def initialize(song_name : String, artist_name : String)
+    @id = 0
+    @song_name = song_name
+    @artist_name = artist_name
+    @count = 0
+  end
+
+  def initialize(id : Int64, song_name : String, artist_name : String, count : Int64)
+    @id = id
     @song_name = song_name
     @artist_name = artist_name
     @count = count
@@ -8,10 +21,6 @@ class Song
   def play
     process = Process.new("pplay", [@song_name, @artist_name], output: Process::Redirect::Pipe)
     process.wait
-  end
-
-  def count
-    @count
   end
 
   def to_s
