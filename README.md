@@ -1,10 +1,10 @@
 # tent
 
-TODO: Write a description here
+tent is cli tool for auto play youtube videos.
 
 ## Installation
 
-TODO: Write installation instructions here
+tent is need [mpv](https://github.com/mpv-player/mpv) and sqlite(?).
 
 ## Usage
 
@@ -12,11 +12,15 @@ TODO: Write usage instructions here
 
 ## Development
 
-TODO: Write development instructions here
+```bash
+git clone https://github.com/satler-git/tent.git
+cd tent
+shards install
+```
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/tent/fork>)
+1. Fork it (<https://github.com/satler-git/tent/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -24,4 +28,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [satler-git](https://github.com/your-github-user) - creator and maintainer
+- [satler-git](https://github.com/satler-git) - creator and maintainer
