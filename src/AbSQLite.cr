@@ -85,26 +85,6 @@ class AbSQL
       database.exec "delete from queue where id = ?", song.id
     end
   end
-
-  def settings(key : String) : Int64
-    DB.open "sqlite3://#{@db}" do |database|
-      database.query "select value from settings where key = ?", key do |settings|
-        settings.each do
-          puts settings.read(Int64)
-          settings.read(Int64)
-        end
-      end
-    end
-    return 0.to_i64
-  end
-
-  def set(key : String, value : Int64)
-    DB.open "sqlite3://#{@db}" do |database|
-      # エラーにならないか
-      settings(key)
-      database.exec "update settings set value = ? where key = ?", value, key
-    end
-  end
 end
 
 # 削除のときにはload_songsから帰ってきたSonglistのplayメソッドから帰ってきたものをeachdoする。
