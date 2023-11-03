@@ -4,6 +4,7 @@ require "./AbSQLite"
 
 class Player
   @list : Songlist
+
   def initialize(endpoint : String, db_path : String)
     @db_path = db_path
     @caller = Caller.new(endpoint)
