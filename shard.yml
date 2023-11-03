@@ -9,8 +9,9 @@ targets:
     main: src/tent.cr
 
 dependencies:
-  admiral:
-    github: jwaldrip/admiral.cr
+  clim:
+    github: at-grandpa/clim
+    version: 0.17.1
   sqlite3:
     github: crystal-lang/crystal-sqlite3
   crest:
