@@ -58,7 +58,7 @@ class AbSQL
           end
         end
       else
-        puts "invaild hit count"
+        STDERR.puts "invaild hit count"
       end
 
       database.exec "insert into queue (artist_name, song_name, count) values (?, ?, ?)", song.artist_name, song.song_name, (count + 1)
@@ -86,17 +86,19 @@ class AbSQL
     end
   end
 
-  def settings(key : String)
+  def settings(key : String) : Int64
     DB.open "sqlite3://#{@db}" do |database|
-      database.query "select value from settings" do |settings|
+      database.query "select value from settings where key = ?", key do |settings|
         settings.each do
-          return settings.read(Int64)
+          puts settings.read(Int64)
+          settings.read(Int64)
         end
       end
     end
+    return 0.to_i64
   end
 
-  def settings(key : String, value : String)
+  def set(key : String, value : Int64)
     DB.open "sqlite3://#{@db}" do |database|
       # エラーにならないか
       settings(key)
@@ -106,5 +108,3 @@ class AbSQL
 end
 
 # 削除のときにはload_songsから帰ってきたSonglistのplayメソッドから帰ってきたものをeachdoする。
-
-AbSQL.new("./test.db")
