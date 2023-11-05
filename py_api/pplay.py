@@ -32,8 +32,8 @@ def play(song_name, artist_name):
     vid = search(song_name, artist_name)
     info_dict = dl(vid)
     locate = f"tmp/{vid}.mp4"
-    if 'downloaded_file_path' in info_dict:
-        locate = info_dict['downloaded_file_path']
+    if 'requested_downloads' in info_dict:
+        locate = info_dict['requested_downloads'][0]['filename']
     else:
         print("Couldn't find access.")
 
@@ -43,7 +43,8 @@ def play(song_name, artist_name):
     except subprocess.CalledProcessError:
         print("Couldn't find \"mpv\" .")
 
-if len(sys.argv) == 3:
-    play(sys.argv[1], sys.argv[2])
-else:
-    print("Invalid args count")
+# if len(sys.argv) == 3:
+#     play(sys.argv[1], sys.argv[2])
+# else:
+#     print("Invalid args count")
+play("Forest", "PIKASONIC")
