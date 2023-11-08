@@ -1,6 +1,5 @@
 require "./Player"
 require "./AbSQLite"
-require "clim"
 require "./Const"
 
 endpoint = Const::ENDPOINT
