@@ -1,0 +1,3 @@
+module Const
+  ENDPOINT = ""
+end
