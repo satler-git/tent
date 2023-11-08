@@ -1,0 +1,72 @@
+name: build-windows
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  pybuild:
+    name: Python-build
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: [3.10]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          git --version
+          python --version
+          python -m pip install --upgrade pip
+          pip install pipenv
+      - name: Create python env
+        shell: powershell
+        run: |
+          cd py_api
+          pipenv install --dev
+      - name: Build
+        shell: powershell
+        run: |
+          cd py_api
+          pipenv run build
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Pplay
+          path: py_api/pplay.exe
+  crbuild:
+    name: Crystal-build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install scoop
+        uses: MinoruSekine/setup-scoop@v1
+      - name: Install Crystal
+        shell: powershell
+        run: |
+         scoop install git
+         scoop bucket add crystal-preview https://github.com/neatorobito/scoop-crystal
+         scoop install vs_2022_cpp_build_tools
+         scoop install crystal
+      - name: Install SQLite
+      - name: install dependencies
+        shell: powershell
+        run: shards install
+      - name: Build
+        shell: powershell
+        run: |
+          crystal build ./src/tent.cr
+        env:
+          CRYSTAL_LIBRARY_RPATH: "./clibs"
