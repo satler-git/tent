@@ -6,10 +6,13 @@ name = "pypi"
 [packages]
 ytmusicapi = "*"
 yt-dlp = "*"
-pyinstaller = "*"
 
 [dev-packages]
-pyinstaller = "*"
+nuitka = "*"
+zstandard = "*"
 
 [requires]
 python_version = "3.10"
+
+[scripts]
+build = "python -m nuitka --follow-imports --onefile pplay.py"
