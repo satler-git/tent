@@ -1,0 +1,77 @@
+name: Build for windows
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+jobs:
+  pybuild:
+    name: Python-build
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: [3.10]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          git --version
+          python --version
+          python -m pip install --upgrade pip
+          pip install pipenv
+      - name: Create python env
+        shell: powershell
+        run: |
+          cd py_api
+          pipenv install --dev
+      - name: Build
+        shell: powershell
+        run: |
+          cd py_api
+          pipenv run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Pplay
+          path: py_api/pplay.dist/pplay.exe
+  crbuild:
+    name: Crystal-build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Crystal And download SQLite
+        shell: powershell
+        run: |
+            (New-Object System.Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-windows-x86_64-msvc-unsupported.zip","crystal.zip")
+            Expand-Archive -Path crystal.zip -DestinationPath crystal/
+            (New-Object System.Net.WebClient).DownloadFile("https://www.sqlite.org/2023/sqlite-dll-win-x64-3440000.zip","sqlite.zip")
+            Expand-Archive -Path sqlite.zip -DestinationPath sqlite/
+      - name: Install SQLite
+        shell: powershell
+        run: |
+            lib /def:sqlite/sqlite.def /machine:x64
+            mv sqlite/* crystal/lib
+      - name: Install dependencies
+        shell: powershell
+        run: crystal/shards.exe install
+      - name: Build
+        shell: powershell
+        run: crystal/crystal.exe build ./src/tent.cr --release --no-debug --static
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Tent
+          path: tent.exe
