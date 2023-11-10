@@ -68,7 +68,7 @@ jobs:
       - name: Install dependencies
         shell: powershell
         run: crystal/shards.exe install
-      - name: replace api key
+      - name: Replace endpoint
         shell: powershell
         env:
           APIENDPOINT: ${{ secrets.APIENDPOINT }}
