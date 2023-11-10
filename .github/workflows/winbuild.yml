@@ -63,7 +63,7 @@ jobs:
       - name: Install SQLite
         shell: powershell
         run: |
-            lib /def:sqlite/sqlite.def /machine:x64
+            lib /def:sqlite/sqlite3.def /machine:x64
             mv sqlite/* crystal/lib
       - name: Install dependencies
         shell: powershell
