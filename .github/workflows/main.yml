@@ -39,11 +39,11 @@ jobs:
         run: |
           cd py_api
           pipenv run build
-      - name: upload artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: Pplay
-          path: py_api/pplay.exe
+          path: py_api/pplay.dist/pplay.exe
   crbuild:
     name: Crystal-build
     runs-on: windows-latest
@@ -51,21 +51,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install scoop
-        uses: MinoruSekine/setup-scoop@v1
-      - name: Install Crystal
+      - name: Install Crystal And download SQLite
         shell: powershell
         run: |
-         scoop install git
-         scoop bucket add crystal-preview https://github.com/neatorobito/scoop-crystal
-         scoop install crystal
+            (New-Object System.Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-windows-x86_64-msvc-unsupported.zip","crystal.zip")
+            Expand-Archive -Path crystal.zip -DestinationPath crystal/
+            (New-Object System.Net.WebClient).DownloadFile("https://www.sqlite.org/2023/sqlite-dll-win-x64-3440000.zip","sqlite.zip")
+            Expand-Archive -Path sqlite.zip -DestinationPath sqlite/
       - name: Install SQLite
-      - name: install dependencies
         shell: powershell
-        run: shards install
+        run: |
+            lib /def:sqlite/sqlite.def /machine:x64
+            mv sqlite/* crystal/lib
+      - name: Install dependencies
+        shell: powershell
+        run: crystal/shards.exe install
       - name: Build
         shell: powershell
-        run: |
-          crystal build ./src/tent.cr
-        env:
-          CRYSTAL_LIBRARY_RPATH: "./clibs"
+        run: crystal/crystal.exe build ./src/tent.cr --release --no-debug --static
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Tent
+          path: tent.exe
