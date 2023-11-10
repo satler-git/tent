@@ -59,6 +59,7 @@ jobs:
             Expand-Archive -Path crystal.zip -DestinationPath crystal/
             (New-Object System.Net.WebClient).DownloadFile("https://www.sqlite.org/2023/sqlite-dll-win-x64-3440000.zip","sqlite.zip")
             Expand-Archive -Path sqlite.zip -DestinationPath sqlite/
+      - uses: ilammy/msvc-dev-cmd@v1
       - name: Install SQLite
         shell: powershell
         run: |
@@ -67,6 +68,15 @@ jobs:
       - name: Install dependencies
         shell: powershell
         run: crystal/shards.exe install
+      - name: Replace endpoint
+        shell: powershell
+        env:
+          APIENDPOINT: ${{ secrets.APIENDPOINT }}
+        run: |
+            New-Item src/Const.cr -type file -Force
+            Add-Content -Path src/Const.cr -Value ("module Const")
+            Add-Content -Path src/Const.cr -Value ("   ENDPOINT = ""$env:APIENDPOINT""")
+            Add-Content -Path src/Const.cr -Value ("end")
       - name: Build
         shell: powershell
         run: crystal/crystal.exe build ./src/tent.cr --release --no-debug --static
