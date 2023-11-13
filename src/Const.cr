@@ -1,3 +1,0 @@
-module Const
-  ENDPOINT = ""
-end

@@ -2,7 +2,16 @@ require "./Player"
 require "./AbSQLite"
 require "./Const"
 
-endpoint = Const::ENDPOINT
+def endpoint : String
+  if ENV["ENDPOINT"]?.nil?
+    raise "Can't find env \"ENDPOINT\".Did you set env?"
+  else
+    return ENV["ENDPOINT"]
+  end
+end
+
+
+endpoint = endpoint()
 now = Time.local Time::Location.load("Asia/Tokyo")
 end_time = Time.local(now.year, now.month, now.day, 13, 5, 0, location: Time::Location.load("Asia/Tokyo"))
 Player.new(endpoint, "./tent.db").play(end_time)
