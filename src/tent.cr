@@ -1,6 +1,5 @@
 require "./Player"
 require "./AbSQLite"
-require "./Const"
 
 def endpoint : String
   if ENV["ENDPOINT"]?.nil?
