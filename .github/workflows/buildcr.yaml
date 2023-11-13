@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies
         shell: powershell
-        run: crystal/shards.exe install
+        run: crystal/shards.exe install --production
 
       - name: Build
         shell: powershell
