@@ -6,10 +6,9 @@ def endpoint : String
   if ENV["ENDPOINT"]?.nil?
     raise "Can't find env \"ENDPOINT\".Did you set env?"
   else
-    return ENV["ENDPOINT"]
+    ENV["ENDPOINT"]
   end
 end
-
 
 endpoint = endpoint()
 now = Time.local Time::Location.load("Asia/Tokyo")
