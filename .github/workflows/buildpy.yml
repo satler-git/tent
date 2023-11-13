@@ -1,0 +1,44 @@
+name: Build Py_api exe for windows
+
+on:
+  push:
+    paths:
+      - "py_api/**"
+  workflow_dispatch:
+
+jobs:
+  pybuild:
+    name: Python-build
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: py_api
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+
+      - name: Create python env
+        shell: powershell
+        run: pipenv install --dev
+          
+      - name: Build
+        shell: powershell
+        run: pipenv run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Pplay
+          path: pplay.dist/pplay.exe
