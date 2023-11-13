@@ -1,0 +1,45 @@
+name: Build Crystal exe for windows
+
+on:
+  push:
+    paths:
+      - "src/**"
+  workflow_dispatch:
+
+jobs:
+  crbuild:
+    name: Crystal-build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Crystal And download SQLite
+        shell: powershell
+        run: |
+            (New-Object System.Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-windows-x86_64-msvc-unsupported.zip","crystal.zip")
+            Expand-Archive -Path crystal.zip -DestinationPath crystal/
+            (New-Object System.Net.WebClient).DownloadFile("https://www.sqlite.org/2023/sqlite-dll-win-x64-3440000.zip","sqlite.zip")
+            Expand-Archive -Path sqlite.zip -DestinationPath sqlite/
+
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Install SQLite
+        shell: powershell
+        run: |
+            lib /def:sqlite/sqlite3.def /machine:x64
+            mv sqlite/* crystal/lib
+
+      - name: Install dependencies
+        shell: powershell
+        run: crystal/shards.exe install
+
+      - name: Build
+        shell: powershell
+        run: crystal/crystal.exe build ./src/tent.cr --release --no-debug --static
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Tent
+          path: tent.exe
