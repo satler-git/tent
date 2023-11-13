@@ -27,7 +27,9 @@ jobs:
       - name: Install SQLite
         shell: powershell
         run: |
-            lib /def:sqlite/sqlite3.def /machine:x64
+            cd sqlite
+            lib /def:sqlite3.def /machine:x64
+            cd ../
             mv sqlite/* crystal/lib
 
       - name: Install dependencies
