@@ -15,4 +15,4 @@ zstandard = "*"
 python_version = "3.9"
 
 [scripts]
-build = "python -m nuitka --follow-imports --onefile pplay.py"
+build = "python -m nuitka --follow-imports --onefile --assume-yes-for-downloads pplay.py"
