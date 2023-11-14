@@ -41,4 +41,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Pplay
-          path: dist/pplay.exe
+          path: py_api\dist\pplay.exe
