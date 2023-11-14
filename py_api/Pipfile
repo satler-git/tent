@@ -16,5 +16,5 @@ zstandard = "*"
 python_version = "3.9"
 
 [scripts]
-build = "python -m nuitka --follow-imports --onefile --assume-yes-for-downloads pplay.py"
-buildpi = "python -m pyinstaller pplay.py --onefile --collect-all ytmusicapi"
+build = "nuitka --follow-imports --onefile --assume-yes-for-downloads pplay.py"
+buildpi = "pyinstaller pplay.py --onefile --collect-all ytmusicapi  --distpath dist"

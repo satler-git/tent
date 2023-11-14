@@ -32,13 +32,13 @@ jobs:
       - name: Create python env
         shell: powershell
         run: pipenv install --dev
-          
+
       - name: Build
         shell: powershell
-        run: pipenv run build
+        run: pipenv run buildpi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: Pplay
-          path: pplay.dist/pplay.exe
+          path: py_api\dist\pplay.exe
