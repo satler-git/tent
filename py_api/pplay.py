@@ -43,8 +43,7 @@ def play(song_name, artist_name):
     except subprocess.CalledProcessError:
         print("Couldn't find \"mpv\" .")
 
-# if len(sys.argv) == 3:
-#     play(sys.argv[1], sys.argv[2])
-# else:
-#     print("Invalid args count")
-play("Forest", "PIKASONIC")
+if len(sys.argv) == 3:
+    play(sys.argv[1], sys.argv[2])
+else:
+    print("Invalid args count")
