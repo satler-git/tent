@@ -7,14 +7,6 @@ def search(song_name, artist_name):
     client = YTMusic(language="ja")
     search_results = client.search(f"{song_name} {artist_name}")
     
-    for result in search_results:
-        if result["resultType"] == "song":
-            vid = result.get("videoId")
-            return vid
-            break
-        else:
-            continue
-    print(f"{song_name} is not a music?")
     return search_results[0].get("videoId")
 
 def dl(vid):
