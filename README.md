@@ -4,7 +4,27 @@ tent is cli tool for auto play youtube videos.
 
 ## Installation
 
-tent is need [mpv](https://github.com/mpv-player/mpv) and sqlite(?).
+tent is needing [mpv](https://github.com/mpv-player/mpv).
+
+### buld
+
+Download Lib(dll)
+
+Visual Studio command prompt
+```cmd
+cd sqlite
+lib /def:sqlite3.def /machine:x64
+```
+
+```bash
+git clone https://github.com/satler-git/tent.git
+cd tent
+shards install
+crystal build ./src/tent.cr --release --no-debug --static
+cd py_api
+pipenv install --dev
+pipenv build
+```
 
 ## Usage
 
