@@ -2,6 +2,10 @@
 
 tent is cli tool for auto play youtube videos.
 
+## Additional Feature
+
+- Predownload
+
 ## Installation
 
 tent is need [mpv](https://github.com/mpv-player/mpv) and sqlite(?).
