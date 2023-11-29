@@ -2,6 +2,9 @@
 
 tent is cli tool for auto play youtube videos.
 
+- [Pplay](https://nightly.link/satler-git/tent/workflows/buildpy.yaml/master/Pplay.zip)
+- [Tent](https://nightly.link/satler-git/tent/workflows/buildcr.yaml/master/Tent.zip)
+
 ## Installation
 
 tent is needing [mpv](https://github.com/mpv-player/mpv).
