@@ -19,7 +19,7 @@ class Song
   end
 
   def play
-    process = Process.new("pplay", [@song_name, @artist_name])
+    process = Process.new("pplay", [@song_name, @artist_name], output: STDOUT)
     process.wait
   end
 
