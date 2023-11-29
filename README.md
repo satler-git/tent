@@ -5,6 +5,7 @@ tent is cli tool for auto play youtube videos.
 ## Additional Feature
 
 - Predownload
+- Change class names
 
 ## Installation
 
