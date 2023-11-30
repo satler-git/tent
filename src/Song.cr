@@ -61,6 +61,6 @@ class Songlist
       i.play
       played_list << i
     end
-    return played_list
+    played_list
   end
 end
