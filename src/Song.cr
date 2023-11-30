@@ -57,12 +57,10 @@ class Songlist
 
     @songlist.each do |i|
       time = Time.local Time::Location.load("Asia/Tokyo")
-      if !(time >= end_time)
-        i.play
-        played_list << i
-      else
-        return played_list
-      end
+      break if time >= end_time
+      i.play
+      played_list << i
     end
+    return played_list
   end
 end
