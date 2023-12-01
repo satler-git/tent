@@ -19,7 +19,8 @@ class Song
   end
 
   def play
-    process = Process.new("pplay", [@song_name, @artist_name], output: Process::Redirect::Pipe)
+    process = Process.new("pplay", [@song_name, @artist_name], output: STDOUT)
+    puts "Now playing #{@song_name} #{@artist_name}"
     process.wait
   end
 
@@ -54,15 +55,14 @@ class Songlist
   def play(end_time : Time)
     self.sort
     played_list = [] of Song
+    puts "Start playing list"
 
     @songlist.each do |i|
       time = Time.local Time::Location.load("Asia/Tokyo")
-      if !(time >= end_time)
-        i.play
-        played_list << i
-      else
-        return played_list
-      end
+      break if time >= end_time
+      i.play
+      played_list << i
     end
+    played_list
   end
 end

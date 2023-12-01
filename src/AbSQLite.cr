@@ -84,6 +84,7 @@ class AbSQL
     DB.open "sqlite3://#{@db}" do |database|
       database.exec "delete from queue where id = ?", song.id
     end
+    puts "Song deleted #{song.id}"
   end
 end
 

@@ -20,6 +20,7 @@ class Caller
       end
     end
     # リクエスト
+    puts "Start calling api"
     response = Crest.get(
       @endpoint,
       params: {:acquired => acquired.to_s},
@@ -37,5 +38,6 @@ class Caller
     DB.open "sqlite3://#{db_path}" do |database|
       database.exec "update settings set value = ? where key = ?", count, "received"
     end
+    puts "End calling api"
   end
 end
