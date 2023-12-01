@@ -20,7 +20,7 @@ def dl(vid):
         result = ydl.extract_info(video_url, download=True)
     return result
 
-def play(song_name, artist_name):
+def echo_locate(song_name, artist_name):
     vid = search(song_name, artist_name)
     info_dict = dl(vid)
     locate = f"tmp/{vid}.mp4"
@@ -28,14 +28,9 @@ def play(song_name, artist_name):
         locate = info_dict['requested_downloads'][0]['filename']
     else:
         print("Couldn't find access.")
-
-    try:
-        subprocess.check_call(["mpv"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run(["mpv", "--fs", locate])
-    except subprocess.CalledProcessError:
-        print("Couldn't find \"mpv\" .")
+    print(locate)
 
 if len(sys.argv) == 3:
-    play(sys.argv[1], sys.argv[2])
+    echo_locate(sys.argv[1], sys.argv[2])
 else:
     print("Invalid args count")
