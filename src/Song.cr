@@ -20,6 +20,7 @@ class Song
 
   def play
     process = Process.new("pplay", [@song_name, @artist_name], output: STDOUT)
+    puts "Now playing #{@song_name} #{@artist_name}"
     process.wait
   end
 
@@ -54,6 +55,7 @@ class Songlist
   def play(end_time : Time)
     self.sort
     played_list = [] of Song
+    puts "Start playing list"
 
     @songlist.each do |i|
       time = Time.local Time::Location.load("Asia/Tokyo")
