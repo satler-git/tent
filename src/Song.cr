@@ -22,7 +22,7 @@ class Song
   end
 
   def play(next_song : Song)
-    if @locale == "0" | File.exists?(locale)
+    if (@locale == "0") | File.exists?(locale)
       # ロケールが設定されていないかファイルがなかったら
       # ダウンロード
       process = Process.new("pplay", [@song_name, @artist_name], output: STDOUT)
