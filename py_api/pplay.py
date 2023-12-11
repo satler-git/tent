@@ -24,7 +24,7 @@ def dl(vid):
 def echo_locate(song_name, artist_name):
     vid = search(song_name, artist_name)
     info_dict = dl(vid)
-    locate = f"{os.getcwd()}tmp/{vid}.mp4"
+    locate = f"{os.getcwd().replace(os.sep,'/')}/tmp/{vid}.mp4"
     if 'requested_downloads' in info_dict:
         locate = info_dict['requested_downloads'][0]['filename']
     else:
