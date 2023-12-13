@@ -16,8 +16,10 @@ function getJsonMusicQueue(acquired = 0) {
   const objectArray = [];
   for (let i = 1 + acquired; i < data.length; i++) {
     const item = {};
+    const headerlist = ["time_stamp", "mail", "song_name", "artist_name"]
+
     for (let j = 0; j < data[0].length; j++) {
-      item[data[0][j]] = data[i][j];
+      item[headerlist[j]] = data[i][j];
     }
     objectArray.push(item);
   }
