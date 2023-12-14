@@ -6,6 +6,7 @@ require "json"
 # 環境変数API_ENDPOINTにはURIスキームをつけてはいけない
 class Caller
   def initialize(endpoint : String)
+    puts endpoint
     @endpoint = endpoint
   end
 
