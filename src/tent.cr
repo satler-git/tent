@@ -2,12 +2,15 @@ require "./Player"
 require "./AbSQLite"
 
 def endpoint : String
-  if ENV["ENDPOINT"]?.nil?
+  if ARGV.size == 2
+    ARGV[1]
+  elsif ENV["ENDPOINT"]?.nil?
     raise "Can't find env \"ENDPOINT\".Did you set env?"
   else
     ENV["ENDPOINT"]
   end
 end
+
 
 endpoint = endpoint()
 now = Time.local Time::Location.load("Asia/Tokyo")
