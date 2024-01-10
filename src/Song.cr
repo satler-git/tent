@@ -31,7 +31,7 @@ class Song
       @url = process.output.gets_to_end
     end
     # 再生を開始
-    mpv_process = Process.new("mpv", [@url], output: STDOUT)
+    mpv_process = Process.new("mpv", ["-fs", @url], output: STDOUT)
     puts "Now playing #{@song_name} #{@artist_name}"
   end
 
