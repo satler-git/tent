@@ -80,7 +80,10 @@ class Songlist
 
     @songlist.each_with_index do |i, index|
       time = Time.local Time::Location.load("Asia/Tokyo")
-      break if time >= end_time
+      if time >= end_time:
+        puts "End time has been exceeded"
+        break
+      end
       @songlist[index + 1] = i.play(@songlist[index + 1])
       played_list << i
     end
