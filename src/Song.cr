@@ -22,7 +22,7 @@ class Song
   end
 
   def play(next_song : Song)
-    if (@url == "0") | File.exists?(locale)
+    if (@url == "0")
       # 検索
       process = Process.new("pplay", [@song_name, @artist_name], output: STDOUT)
       puts "Now searching #{@song_name} #{@artist_name}"
