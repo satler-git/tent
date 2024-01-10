@@ -21,7 +21,7 @@ class Song
     @url = "0"
   end
 
-  def play(next_song : Song)
+  def play()
     if (@url == "0")
       # 検索
       process = Process.new("pplay", [@song_name, @artist_name], output: STDOUT)
@@ -68,13 +68,13 @@ class Songlist
     played_list = [] of Song
     puts "Start playing list"
 
-    @songlist.each_with_index do |i, index|
+    @songlist.each do |i|
       time = Time.local Time::Location.load("Asia/Tokyo")
 
       puts "End time has been exceeded" if time >= end_time
       break if time >= end_time
 
-      @songlist[index + 1] = i.play(@songlist[index + 1])
+      i.play()
       played_list << i
     end
     played_list
