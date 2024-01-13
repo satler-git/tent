@@ -8,3 +8,5 @@ test.db
 tent
 /py_api/pplay.build
 /py_api/pplay.dist
+**/build/
+**/dist/
