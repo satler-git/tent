@@ -21,8 +21,8 @@ class Song
     @url = "0"
   end
 
-  def play()
-    if (@url == "0")
+  def play
+    if @url == "0"
       # 検索
       process = Process.new("pplay", [@song_name, @artist_name], output: STDOUT)
       puts "Now searching #{@song_name} #{@artist_name}"
@@ -31,7 +31,7 @@ class Song
       @url = process.output.gets_to_end
     end
     # 再生を開始
-    mpv_process = Process.new("mpv", ["-fs", @url], output: STDOUT)
+    Process.new("mpv", ["-fs", @url], output: STDOUT)
     puts "Now playing #{@song_name} #{@artist_name}"
   end
 
@@ -74,7 +74,7 @@ class Songlist
       puts "End time has been exceeded" if time >= end_time
       break if time >= end_time
 
-      i.play()
+      i.play
       played_list << i
     end
     played_list
