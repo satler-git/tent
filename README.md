@@ -1,6 +1,11 @@
 # tent
 
-tent is cli tool for auto play youtube videos.
+Tent is a CLI tool to automatically play YouTube videos.
+
+### Nighty URLs
+
+- [Pplay](https://nightly.link/satler-git/tent/workflows/buildpy.yaml/master/Pplay.zip)
+- [Tent](https://nightly.link/satler-git/tent/workflows/buildcr.yaml/master/Tent.zip)
 
 ## Additional Feature
 
@@ -9,11 +14,41 @@ tent is cli tool for auto play youtube videos.
 
 ## Installation
 
-tent is need [mpv](https://github.com/mpv-player/mpv) and sqlite(?).
+Preinstall required.
+
+- mpv
+- ffmpeg
+
+Download binary from release.
+
+### buld
+
+#### SQLite
+
+Download Lib(dll)
+
+Visual Studio command prompt
+```cmd
+cd sqlite
+lib /def:sqlite3.def /machine:x64
+```
+
+#### Tent
+
+```bash
+git clone https://github.com/satler-git/tent.git
+cd tent
+shards install
+crystal build ./src/tent.cr --release --no-debug --static
+cd py_api
+pipenv install --dev
+pipenv build
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Put your apiendpoint(gas) to `APIENDPOINT`, ENv.
+And Run tent(binary).
 
 ## Development
 
