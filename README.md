@@ -4,8 +4,8 @@ Tent is a CLI tool to automatically play YouTube videos.
 
 ### Nighty URLs
 
-- [Pplay](https://nightly.link/satler-git/tent/workflows/buildpy.yaml/master/Pplay.zip)
-- [Tent](https://nightly.link/satler-git/tent/workflows/buildcr.yaml/master/Tent.zip)
+- [Pplay](https://nightly.link/satler-git/tent/workflows/buildpy.yaml/v2-predl-cache/Pplay.zip)
+- [Tent](https://nightly.link/satler-git/tent/workflows/buildcr.yaml/v2-predl-cache/Tent.zip)
 
 ## Additional Feature
 
